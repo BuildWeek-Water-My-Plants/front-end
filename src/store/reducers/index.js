@@ -1,31 +1,31 @@
-import {FETCH_CHARACTER_START, FETCH_CHARACTER_SUCCESS, FETCH_CHARACTER_FAILURE} from "../actions";
+import {LOGIN_USER_START, LOGIN_USER_SUCCESS, LOGIN_USER_FAILURE, REGISTER_USER_START, REGISTER_USER_SUCCESS, REGISTER_USER_FAILURE} from '../actions'
 
 const initialState = {
-    plants: [],
-    isLoading: false,
-    error: "",
-};
+    user:{
+        username: "",
+        password: "",
+},
+    isRegistering: false,
+    isLoggingIn: false,
+    errors:'',
+    id: '',
+}
 
-export const reducer = (state = initialState, action) => {
-    switch (action.type) {
-        case FETCH_CHARACTER_START:
-            return {
-                ...state,
-                isLoading: true,
-            };
-        case FETCH_CHARACTER_SUCCESS:
-            return {
-                ...state,
-                isLoading: false,
-                plants: action.payload,
-            };
-        case FETCH_CHARACTER_FAILURE:
-            return {
-                ...state,
-                isLoading: false,
-                error: action.payload,
-            };
+export const userReducer = (state = initialState, action) => {
+    switch(action.type) {
+        case LOGIN_USER_START:
+            return {...state, isLoggingIn: true, error: "", message: ""};
+        case LOGIN_USER_SUCCESS:
+            return {...state, isLoggingIn: false, id: action.payload};
+        case LOGIN_USER_FAILURE:
+            return {...state, isLoggingIn: false, error: action.payload};
+        case REGISTER_USER_START:
+            return {...state, isRegistering: true, user: action.payload};
+        case REGISTER_USER_SUCCESS:
+            return {...state, isRegistering: false, user: action.payload};
+        case REGISTER_USER_FAILURE:
+            return {...state, isRegistering: false, error: action.payload};
         default:
-            return state;
+            return state
     }
-};
+}
