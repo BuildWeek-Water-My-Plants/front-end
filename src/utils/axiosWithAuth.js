@@ -1,11 +1,11 @@
 import axios from "axios";
 
 export const axiosWithAuth = () => {
-    const token = localStorage.getItem("token")
-    return axios.create({
-        baseURL: "API LINK GOES HERE", //<---API info needed here
-        headers: {
-            Authorization: token,
-        }
-    });
+  const token = localStorage.getItem("token");
+  return axios.create({
+    headers: {
+      Authorization: token,
+    },
+    baseURL: "https://waterplantsunit4.herokuapp.com",
+  });
 };
