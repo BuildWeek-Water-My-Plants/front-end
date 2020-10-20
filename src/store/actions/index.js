@@ -1,4 +1,4 @@
-import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
 export const IS_FETCHING = "IS_FETCHING";
 export const FETCH_PLANTID_SUCCESS = "FETCH_PLANTID_SUCCESS";
