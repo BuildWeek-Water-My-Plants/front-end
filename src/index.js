@@ -5,7 +5,10 @@ import './index.css';
 import App from './App';
 import {createStore, applyMiddleware} from "redux";
 import {Provider} from "react-redux";
-import {reducer} from "./store/reducers";
-const store = createStore(reducer)
+import {userReducer} from "./store/reducers";
+import axiosWithAuth from "./utils/axiosWithAuth"
+
+const store = createStore(userReducer)
+
 
 ReactDOM.render(<Provider store={store}><Router><App /></Router></Provider>, document.getElementById('root'));
