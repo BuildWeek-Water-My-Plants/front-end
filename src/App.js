@@ -18,7 +18,7 @@ import Login from './components/Login'
 import Signup from './components/Signup'
 import PlantList from './components/PlantList'
 import Plant from './components/Plant'
-// import AddPlant from './components/AddPlant'
+import AddPlant from './components/AddPlant'
 
 export default function App(props) {
   return (
@@ -29,7 +29,7 @@ export default function App(props) {
           <NavLink to="/Signup" activeClassName="selected">Signup</NavLink>
           <NavLink to="/Login" activeClassName="selected">Login</NavLink>
           <NavLink to="/PlantList" activeClassName="selected">Plant List</NavLink>
-          {/* <NavLink to="/AddPlant" activeClassName="selected">Add Plant</NavLink> */}
+          <NavLink to="/AddPlant" activeClassName="selected">Add Plant</NavLink>
         </nav>
       </header>
 
@@ -44,7 +44,7 @@ export default function App(props) {
           <PlantList />
         </Route>
         <Route path="/AddPlant">
-          {/* <AddPlant /> */}
+          <AddPlant />
         </Route>
         <Route path="/Plant">
           <Plant />
