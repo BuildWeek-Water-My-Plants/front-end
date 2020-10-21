@@ -1,11 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 import { Route, Switch, Link, NavLink } from "react-router-dom";
+import PrivateRoute from './utils/PrivateRoute'
+import {
+  addPlant,
+  getPlantByID,
+  requestSignup,
+  requestLogin,
+  updatePlant,
+  deletePlant,
+  updateUser,
+  deleteUser,
+  updatePlantWater,
+} from "./store/actions";
+
+// components
 import Login from './components/Login'
 import Signup from './components/Signup'
+import PlantList from './components/PlantList'
+import Plant from './components/Plant'
+import AddPlant from './components/AddPlant'
 
-function App() {
+export default function App(props) {
   return (
     <div className="App">
       <header>
@@ -13,21 +28,29 @@ function App() {
         <nav>
           <NavLink to="/Signup" activeClassName="selected">Signup</NavLink>
           <NavLink to="/Login" activeClassName="selected">Login</NavLink>
+          <NavLink to="/PlantList" activeClassName="selected">Plant List</NavLink>
+          <NavLink to="/AddPlant" activeClassName="selected">Add Plant</NavLink>
         </nav>
       </header>
 
       <Switch>
         <Route path="/Login">
-          <Login />
+          <Login/>
         </Route>
         <Route path="/Signup">
-          <Signup />
+          <Signup/>
+        </Route>
+        <Route path="/PlantList">
+          <PlantList />
+        </Route>
+        <Route path="/AddPlant">
+          <AddPlant />
+        </Route>
+        <Route path="/Plant">
+          <Plant />
         </Route>
       </Switch>
     </div>
   );
 }
-
-
-export default App; 
  

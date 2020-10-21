@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import {useHistory} from 'react-router-dom';
+import { connect } from "react-redux";
+import { requestLogin} from "../store/actions";
 
 function Copyright() {
     return (
@@ -19,7 +22,7 @@ function Copyright() {
             {'Copyright © '}
             <Link color="inherit" href="https://material-ui.com/">
                 Water My Plants
-      </Link>{' '}
+      </Link>
             {new Date().getFullYear()}
             {'.'}
         </Typography>
@@ -46,8 +49,28 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function SignIn() {
+function SignIn({requestLogin}) {
     const classes = useStyles();
+    const history = useHistory();
+
+    const [formData, setFormData] = useState({
+        username: "",
+        password: "",
+    });
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        requestLogin(formData);
+        history.push("/PlantList");
+      };
+    
+      const handleChange = (e) => {
+        e.preventDefault();
+        setFormData({
+          ...formData,
+          [e.target.name]: e.target.value,
+        });
+      };
 
     return (
         <Container component="main" maxWidth="xs">
@@ -59,17 +82,19 @@ export default function SignIn() {
                 <Typography component="h1" variant="h5">
                     Sign in
         </Typography>
-                <form className={classes.form} noValidate>
+                <form className={classes.form} noValidate onSubmit={(e) => handleSubmit(e)}>
                     <TextField
                         variant="outlined"
                         margin="normal"
                         required
                         fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
+                        id="username"
+                        label="Username"
+                        name="username"
+                        autoComplete="username"
                         autoFocus
+                        onChange={(e) => handleChange(e)}
+                        value={formData.username}
                     />
                     <TextField
                         variant="outlined"
@@ -81,6 +106,8 @@ export default function SignIn() {
                         type="password"
                         id="password"
                         autoComplete="current-password"
+                        onChange={(e) => handleChange(e)}
+                        value={formData.password}
                     />
                     <FormControlLabel
                         control={<Checkbox value="remember" color="primary" />}
@@ -115,3 +142,5 @@ export default function SignIn() {
         </Container>
     );
 }
+
+export default connect(null, {requestLogin} )(SignIn)
