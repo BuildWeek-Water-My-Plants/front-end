@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import {useHistory} from "react-router-dom";
+import { connect } from "react-redux";
+import { requestSignup } from "../store/actions";
 
 function Copyright() {
   return (
@@ -19,7 +22,7 @@ function Copyright() {
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
         Water My Plants
-      </Link>{' '}
+      </Link>
       {new Date().getFullYear()}
       {'.'}
     </Typography>
@@ -46,8 +49,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp() {
+function SignUp({requestSignup}) {
+    const history = useHistory();
     const classes = useStyles();
+    // const {register, handleSubmit} = useForm();
+
+    const [formData, setFormData] = useState({
+        email: "",
+        password: "",
+        first_name: "",
+        last_name: "",
+        phonenumber: "",
+        username: "",
+    });
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        requestSignup(formData);
+        history.push("/Login")
+    };
+
+    const handleChange = e => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
+    };
 
     return (
         <Container component="main" maxWidth="xs">
@@ -58,9 +85,37 @@ export default function SignUp() {
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Sign up
-        </Typography>
-                <form className={classes.form} noValidate>
+                </Typography>
+                <form className={classes.form} noValidate onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                autoComplete="username"
+                                name="username"
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="username"
+                                label="username"
+                                value={formData.username}
+                                onChange={e => setFormData({ ...formData, username: e.target.value })}
+                                autoFocus
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                autoComplete="phonenumber"
+                                name="phonenumber"
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="phonenumber"
+                                label="phonenumber"
+                                value={formData.phonenumber}
+                                onChange={e => setFormData({ ...formData, phonenumber: e.target.value })}
+                                autoFocus
+                            />
+                        </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 autoComplete="fname"
@@ -70,9 +125,11 @@ export default function SignUp() {
                                 fullWidth
                                 id="firstName"
                                 label="First Name"
+                                value={formData.first_name}
+                                onChange={e => setFormData({ ...formData, first_name: e.target.value })}
                                 autoFocus
                             />
-                        </Grid>
+                            </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 variant="outlined"
@@ -82,6 +139,8 @@ export default function SignUp() {
                                 label="Last Name"
                                 name="lastName"
                                 autoComplete="lname"
+                                value={formData.last_name}
+                                onChange={ e => setFormData({ ...formData, last_name: e.target.value })}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -93,6 +152,8 @@ export default function SignUp() {
                                 label="Email Address"
                                 name="email"
                                 autoComplete="email"
+                                value={formData.email}
+                                onChange={e => setFormData({ ...formData, email: e.target.value })}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -105,6 +166,8 @@ export default function SignUp() {
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
+                                value={formData.password}
+                                onChange={e => setFormData({ ...formData, password: e.target.value })}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -138,3 +201,5 @@ export default function SignUp() {
         </Container>
     );
 }
+
+export default connect(null, {requestSignup} )(SignUp)
