@@ -17,8 +17,12 @@ import {IS_FETCHING, POST_LOGIN_SUCCESS, POST_LOGIN_FAILURE, POST_SIGNUP_SUCCESS
           error: "",
           isFetching: true,
         };
+        case POST_LOGIN_SUCCESS:
+          return {
+            ...state,
+            user: action.payload,
+          }
       case POST_SIGNUP_SUCCESS:
-      case POST_LOGIN_SUCCESS:
       case DELETE_PLANT_SUCCESS:
       case UPDATE_PLANTWATER_SUCCESS:
         return {
