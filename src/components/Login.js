@@ -28,7 +28,7 @@ function Copyright() {
         </Typography>
     );
 }
-
+ 
 const useStyles = makeStyles((theme) => ({
     paper: {
         marginTop: theme.spacing(8),
@@ -49,7 +49,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function SignIn({ requestLogin }) {
+
+function SignIn({requestLogin, user}) {
     const classes = useStyles();
     const history = useHistory();
 
@@ -61,10 +62,12 @@ function SignIn({ requestLogin }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         requestLogin(formData);
-        history.push("/PlantList");
-    };
 
-    const handleChange = (e) => {
+        history.push(`${user.id}/PlantList`);
+      };
+    
+      const handleChange = (e) => {
+
         e.preventDefault();
         setFormData({
             ...formData,
@@ -143,4 +146,8 @@ function SignIn({ requestLogin }) {
     );
 }
 
-export default connect(null, { requestLogin })(SignIn)
+const mapStateToProps = state => {
+    return {user: state.user};
+}
+
+export default connect(mapStateToProps, {requestLogin} )(SignIn)

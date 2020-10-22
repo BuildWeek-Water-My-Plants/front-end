@@ -53,6 +53,7 @@ export const requestLogin = (userData) => (dispatch) => {
     .then((res) => {
       localStorage.setItem("token", res.data.token);
       dispatch({ type: POST_LOGIN_SUCCESS, payload: res.data });
+      console.log(res.data)
     })
     .catch((err) => {
       dispatch({ type: POST_LOGIN_FAILURE, payload: err });
@@ -65,11 +66,13 @@ export const requestSignup = (userData) => (dispatch) => {
     .post("/register", userData)
     .then((res) => {
       dispatch({ type: POST_SIGNUP_SUCCESS, payload: res.data });
+      console.log(res.data);
+      console.log(userData);
     })
     .catch((err) => {
       dispatch({ type: POST_SIGNUP_FAILURE, payload: err });
     });
-};
+}; 
 
 export const addPlant = (plantData, id) => (dispatch) => {
   dispatch({ type: IS_FETCHING });
