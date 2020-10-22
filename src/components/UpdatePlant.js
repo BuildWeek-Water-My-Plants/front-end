@@ -64,7 +64,7 @@ const UpdatePlant = ({ plant, updatePlant, deletePlant }) => {
             onChange={(e) => {
               handleChange(e);
             }}
-          />
+          /> 
           <label for="imageURL">Plant Image URL</label>
           <input
             type="text"

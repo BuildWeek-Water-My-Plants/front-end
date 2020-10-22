@@ -19,7 +19,7 @@ const UpdateUser = ({ user, updateUser, deleteUser }) => {
       toggle();
     }
   };
-
+ 
   const handleChange = (e) => {
     console.log(e.target.value);
     setUserInfo({

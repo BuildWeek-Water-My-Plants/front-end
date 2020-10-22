@@ -72,7 +72,7 @@ export const requestSignup = (userData) => (dispatch) => {
     .catch((err) => {
       dispatch({ type: POST_SIGNUP_FAILURE, payload: err });
     });
-};
+}; 
 
 export const addPlant = (plantData, id) => (dispatch) => {
   dispatch({ type: IS_FETCHING });

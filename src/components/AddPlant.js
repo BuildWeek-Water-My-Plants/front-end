@@ -13,7 +13,7 @@ const AddPlant = ({addPlant, userID}) => {
         plant_url:
           "https://www.gardeningknowhow.com/wp-content/uploads/2019/11/red-rose.jpg",
       };
-
+ 
       const mockHandleSubmit = () => {
         addPlant(mockPlant, userID);
       };

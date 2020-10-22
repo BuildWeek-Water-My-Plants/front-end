@@ -16,7 +16,7 @@ import {IS_FETCHING, POST_LOGIN_SUCCESS, POST_LOGIN_FAILURE, POST_SIGNUP_SUCCESS
           ...state,
           error: "",
           isFetching: true,
-        };
+        }; 
         case POST_LOGIN_SUCCESS:
           return {
             ...state,
