@@ -54,13 +54,4 @@ export default function App(props) {
     </StyledMain>
   );
 }
-
-const StyledMain = styled.div`
-  line-height: 1;
-`
-
-const StyledNav = styled.nav`
-  display: block;
-  background-color: red;
-`
   
